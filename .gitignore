@@ -22,3 +22,9 @@ build/
 
 # Project specific
 *.log
+
+# LaTeX temp files
+*.aux
+*.out
+*.synctex.gz
+.texpadtmp/
