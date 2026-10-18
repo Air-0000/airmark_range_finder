@@ -16,7 +16,24 @@ extern "C" {
 #include "mark_detection.h"
 
 /* ARM CMSIS DSP Library */
+#ifdef USE_HOST_TEST
+typedef float float32_t;
+typedef struct { uint32_t CYCCNT; } DWT_Type;
+static inline DWT_Type* get_host_dwt(void) {
+    static DWT_Type s_dwt = {0};
+    return &s_dwt;
+}
+#define DWT (get_host_dwt())
+static inline float32_t arm_dot_prod_f32(const float32_t *pSrcA, const float32_t *pSrcB, uint32_t blockSize) {
+    float32_t sum = 0.0f;
+    for (uint32_t i = 0; i < blockSize; i++) {
+        sum += pSrcA[i] * pSrcB[i];
+    }
+    return sum;
+}
+#else
 #include "arm_math.h"
+#endif
 
 /* Exported types ------------------------------------------------------------*/
 /**

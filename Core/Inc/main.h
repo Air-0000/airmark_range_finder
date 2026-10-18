@@ -11,9 +11,14 @@
 extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+#ifdef USE_HOST_TEST
+#include <stdint.h>
+#include <stddef.h>
+#include <stdbool.h>
+#else
 #include "stm32f4xx_hal_conf.h"
 #include "stm32f4xx_hal.h"
+#endif
 
 /* Exported types ------------------------------------------------------------*/
 /**
